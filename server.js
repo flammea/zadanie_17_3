@@ -19,12 +19,15 @@ app.get('/getNote', function (req, res) {
 });
 
 app.post('/updateNote/:note', function (req, res) {
-    stringifyFile += req.params.note;
-    fs.writeFile('./test.json', stringifyFile, function (err) {
-        if (err) throw err;
-        console.log('file updated');
+    fs.readFile('test.json', function(err, data) {
+    stringifyFile = data + req.params.note;
+    	fs.writeFile('./test.json', stringifyFile, function (err) {
+	        if (err) throw err;
+	        console.log('file updated');
+    	});
     });
 });
+
 
 
 app.listen(3000);
